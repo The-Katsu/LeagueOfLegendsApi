@@ -1,4 +1,7 @@
+using LeagueOfLegends.Api.Domain.Entities;
+using LeagueOfLegends.Api.Persistence.NHibernate.Data;
 using Microsoft.AspNetCore.Mvc;
+using NHibernate.Linq;
 
 namespace LeagueOfLegends.Api.Controllers;
 
