@@ -30,8 +30,9 @@ public class ComicMapping : ClassMapping<Comic>
             m =>
             {
                 m.Table("champion_comic");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
             },
             r => 
                 r.ManyToMany(m => m.Column("comic_id")));

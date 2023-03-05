@@ -28,7 +28,7 @@ public class AbilityMapping : ClassMapping<Ability>
         ManyToOne(x => x.Champion,
             m =>
             {
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Column("champion_id");
             });
     }

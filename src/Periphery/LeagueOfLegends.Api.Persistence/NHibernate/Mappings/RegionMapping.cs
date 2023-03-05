@@ -24,11 +24,19 @@ public class RegionMapping : ClassMapping<Region>
         Property(x => x.Overview, m => m.Column("overview"));
         Property(x => x.AnimatedImageUrl, m => m.Column("animated_image_url"));
         
-        Set(x => x.AssociatedChampions, 
-            m => m.Key(k => k.Column("region_id")),
+        Set(x => x.AssociatedChampions,
+            m =>
+            {
+                m.Key(k => k.Column("region_id"));
+                m.Lazy(CollectionLazy.Lazy);
+            },
             r => r.OneToMany());
         Set(x => x.RelatedStories,
-            m => m.Key(k => k.Column("story_id")),
+            m =>
+            {
+                m.Key(k => k.Column("story_id"));
+                m.Lazy(CollectionLazy.Lazy);
+            },
             r => r.OneToMany());
     }
 }

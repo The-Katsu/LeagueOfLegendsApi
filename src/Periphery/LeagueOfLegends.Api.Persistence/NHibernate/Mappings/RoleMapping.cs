@@ -24,8 +24,9 @@ public class RoleMapping : ClassMapping<Role>
         Set(x => x.Champions, m =>
             {
                 m.Table("champion_roles");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("role_id"));
+                m.Lazy(CollectionLazy.Lazy);
             }, 
             r => r.ManyToMany(m => m.Column("champion_id"))
         );

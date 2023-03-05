@@ -1,6 +1,5 @@
-
-
 using System.Text.Json.Serialization;
+using LeagueOfLegends.Api.Infrastructure;
 using LeagueOfLegends.Api.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +7,8 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services
-    .AddPersistence(configuration);
+    .AddPersistence(configuration)
+    .AddInfrastructure(configuration);
 
 builder.Services.AddControllers()
     .AddJsonOptions(x =>

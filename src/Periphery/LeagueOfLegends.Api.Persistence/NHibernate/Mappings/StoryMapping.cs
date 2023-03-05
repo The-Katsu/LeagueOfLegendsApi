@@ -31,8 +31,9 @@ public class StoryMapping : ClassMapping<Story>
             m =>
             {
                 m.Table("champion_story");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
             },
             r => 
                 r.ManyToMany(m => m.Column("story_id")));
@@ -40,7 +41,7 @@ public class StoryMapping : ClassMapping<Story>
         ManyToOne(x => x.Region, 
             m =>
             {
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Column("region_id");
             });
     }

@@ -23,7 +23,7 @@ public class RelatedStoryMapping : ClassMapping<RelatedStory>
             m =>
             {
                 m.Column("champion_id");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
             });
     }
 }

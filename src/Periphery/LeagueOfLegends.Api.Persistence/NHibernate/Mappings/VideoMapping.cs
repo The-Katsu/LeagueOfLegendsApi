@@ -29,9 +29,10 @@ public class VideoMapping : ClassMapping<Video>
         Set(x => x.FeaturedChampions,
             m =>
             {
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("champion_id"));
                 m.Table("champion_video");
+                m.Lazy(CollectionLazy.Lazy);
             },
             r => 
                 r.ManyToMany(m => m.Column("video_id")));

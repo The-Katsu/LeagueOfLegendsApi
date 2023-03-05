@@ -1,5 +1,4 @@
-﻿using LeagueOfLegends.Api.Domain.Entities;
-using LeagueOfLegends.Api.Domain.Entities.Base;
+﻿using LeagueOfLegends.Api.Domain.Entities.Base;
 using NHibernate;
 
 namespace LeagueOfLegends.Api.Persistence.NHibernate.Data;
@@ -11,27 +10,23 @@ public class NHibernateDbContext : INHibernateDbContext
 
     public NHibernateDbContext(ISession session) => _session = session;
 
-    public IQueryable<Ability> Abilities => _session.Query<Ability>();
-    public IQueryable<Champion> Champions => _session.Query<Champion>();
-    public IQueryable<Comic> Comic => _session.Query<Comic>();
-    public IQueryable<Race> Races => _session.Query<Race>();
-    public IQueryable<Region> Regions => _session.Query<Region>();
-    public IQueryable<Role> Roles => _session.Query<Role>();
-    public IQueryable<Skin> Skins => _session.Query<Skin>();
-    public IQueryable<Story> Stories => _session.Query<Story>();
-    public IQueryable<Video> Videos => _session.Query<Video>();
-    public IQueryable<RelatedChampion> RelatedChampions => _session.Query<RelatedChampion>();
-    public IQueryable<RelatedStory> RelatedStories => _session.Query<RelatedStory>();
-    
-    public void BeginTransaction() => _transaction = _session.BeginTransaction();
+    public IQueryable<T> Query<T>() where T : Entity => _session.Query<T>();
+    public IQueryOver<T, T> QueryOver<T>() where T : Entity => _session.QueryOver<T>(); 
+    public async Task<T> GetByIdAsync<T>(Guid id) where T : Entity => await _session.GetAsync<T>(id);
 
-    public async Task Commit() => await _transaction?.CommitAsync()!;
+    public void BeginTransaction() => 
+        _transaction = _session.BeginTransaction();
+    public async Task Commit(CancellationToken token) => 
+        await _transaction?.CommitAsync(token)!;
 
-    public async Task Rollback() => await _transaction?.RollbackAsync()!;
+    public async Task RollbackAsync(CancellationToken token = default) => 
+        await _transaction?.RollbackAsync(token)!;
 
-    public async Task Save(Entity entity) => await _session.SaveOrUpdateAsync(entity);
+    public async Task SaveAsync(Entity entity, CancellationToken token = default) => 
+        await _session.SaveOrUpdateAsync(entity, token);
 
-    public async Task Delete(Entity entity) => await _session.DeleteAsync(entity);
+    public async Task DeleteAsync(Entity entity, CancellationToken token = default) => 
+        await _session.DeleteAsync(entity, token);
 
     public void CloseTransaction()
     {

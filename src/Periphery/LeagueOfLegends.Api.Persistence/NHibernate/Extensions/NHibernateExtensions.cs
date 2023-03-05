@@ -24,8 +24,10 @@ public static class NHibernateExtensions
             p.ConnectionString = connectionString;
             p.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
             p.SchemaAction = SchemaAutoAction.Validate;
-            p.LogFormattedSql = false;
-            p.LogSqlInConsole = false;
+#if DEBUG
+            p.LogFormattedSql = true;
+            p.LogSqlInConsole = true;
+#endif
         });
         configuration.AddMapping(hbmMapping);
 

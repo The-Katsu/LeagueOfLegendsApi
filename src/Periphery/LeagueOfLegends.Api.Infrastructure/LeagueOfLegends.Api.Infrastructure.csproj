@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\LeagueOfLegends.Api.Persistence\LeagueOfLegends.Api.Persistence.csproj" />
+    </ItemGroup>
+
 </Project>

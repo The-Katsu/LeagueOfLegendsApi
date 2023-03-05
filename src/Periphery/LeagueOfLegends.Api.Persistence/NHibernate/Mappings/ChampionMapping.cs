@@ -27,32 +27,35 @@ public class ChampionMapping : ClassMapping<Champion>
         
         ManyToOne(x => x.Region, m =>
         {
-            m.Cascade(Cascade.None);
-            m.Column("region_id");            
+            m.Cascade(Cascade.All);
+            m.Column("region_id");
         });
         
         Set(x => x.Races, m =>
             {
                 m.Table("champion_races");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
             }, 
             r => r.ManyToMany(m => m.Column("race_id"))
             );
         Set(x => x.Roles, m =>
             {
                 m.Table("champion_roles");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
             }, 
             r => r.ManyToMany(m => m.Column("role_id"))
         );
         Set(x => x.FeaturedVideos,
             m =>
             {
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("video_id"));
                 m.Table("champion_video");
+                m.Lazy(CollectionLazy.Lazy);
             },
             r => 
                 r.ManyToMany(m => m.Column("champion_id")));
@@ -60,8 +63,9 @@ public class ChampionMapping : ClassMapping<Champion>
             m =>
             {
                 m.Table("champion_story");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("story_id"));
+                m.Lazy(CollectionLazy.Lazy);
             },
             r => 
                 r.ManyToMany(m => m.Column("champion_id")));
@@ -69,8 +73,9 @@ public class ChampionMapping : ClassMapping<Champion>
             m =>
             {
                 m.Table("champion_comic");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("comic_id"));
+                m.Lazy(CollectionLazy.Lazy);
             },
             r => 
                 r.ManyToMany(m => m.Column("champion_id")));
@@ -78,13 +83,25 @@ public class ChampionMapping : ClassMapping<Champion>
         
         
         Set(x => x.Skins,
-            m => m.Key(k => k.Column("champion_id")),
+            m =>
+            {
+                m.Key(k => k.Column("champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
+            },
             r => r.OneToMany());
-        Set(x => x.RelatedChampions, 
-            m => m.Key(k => k.Column("related_champion_id")),
+        Set(x => x.RelatedChampions,
+            m =>
+            {
+                m.Key(k => k.Column("related_champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
+            },
             r => r.OneToMany());
         Set(x => x.Abilities,
-            m => m.Key(k => k.Column("champion_id")),
+            m =>
+            {
+                m.Key(k => k.Column("champion_id"));
+                m.Lazy(CollectionLazy.Lazy);
+            },
             r => r.OneToMany());
     }
 }

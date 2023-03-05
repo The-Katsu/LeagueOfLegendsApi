@@ -24,8 +24,9 @@ public class RaceMapping : ClassMapping<Race>
         Set(x => x.Champions, m =>
             {
                 m.Table("champion_races");
-                m.Cascade(Cascade.None);
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("race_id"));
+                m.Lazy(CollectionLazy.Lazy);
             }, 
             r => r.ManyToMany(m => m.Column("champion_id"))
         );
