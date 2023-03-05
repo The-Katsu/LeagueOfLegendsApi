@@ -33,8 +33,6 @@ public class NHibernateDbContext : INHibernateDbContext
 
     public async Task Delete(Entity entity) => await _session.DeleteAsync(entity);
 
-    public IQuery CreateQuery(string sql) => _session.CreateQuery(sql);
-
     public void CloseTransaction()
     {
         if (_transaction is null) return;

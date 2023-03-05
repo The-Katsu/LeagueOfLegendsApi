@@ -4,12 +4,12 @@ namespace LeagueOfLegends.Api.Domain.Entities;
 
 public class Video : Entity
 {
-    public virtual string Title { get; set; } = string.Empty;
-    public virtual string Subtitle { get; set; } = string.Empty;
-    public virtual string Description { get; set; } = string.Empty;
-    public virtual string ImageUrl { get; set; } = string.Empty;
-    public virtual string Url { get; set; } = string.Empty;
-    public virtual string Type { get; set; } = string.Empty;
+    public virtual string Title { get; set; } = null!;
+    public virtual string Subtitle { get; set; } = null!;
+    public virtual string Description { get; set; } = null!;
+    public virtual string ImageUrl { get; set; } = null!;
+    public virtual string Url { get; set; } = null!;
+    public virtual string Type { get; set; } = null!;
 
     public virtual ISet<Champion> FeaturedChampions { get; set; } = new HashSet<Champion>();
 }

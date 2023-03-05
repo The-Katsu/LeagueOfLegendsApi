@@ -4,11 +4,11 @@ namespace LeagueOfLegends.Api.Domain.Entities;
 
 public class Champion : Entity
 {
-    public virtual string ImageUrl { get; set; } = string.Empty;
-    public virtual string AnimatedImageUrl { get; set; } = string.Empty;
-    public virtual string Name { get; set; } = string.Empty;
-    public virtual string Nickname { get; set; } = string.Empty;
-    public virtual string Biography { get; set; } = string.Empty;
+    public virtual string ImageUrl { get; set; } = null!;
+    public virtual string AnimatedImageUrl { get; set; } = null!;
+    public virtual string Name { get; set; } = null!;
+    public virtual string Nickname { get; set; } = null!;
+    public virtual string Biography { get; set; } = null!;
     public virtual Region Region { get; set; } = null!;
     public virtual ISet<Comic> FeaturedComic { get; set; } = new HashSet<Comic>();
     public virtual ISet<Story> FeaturedStories { get; set; } = new HashSet<Story>();

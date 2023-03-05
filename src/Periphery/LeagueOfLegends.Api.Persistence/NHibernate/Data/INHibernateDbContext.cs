@@ -12,7 +12,6 @@ public interface INHibernateDbContext
     public void CloseTransaction();
     public Task Save(Entity entity);
     public Task Delete(Entity entity);
-    public IQuery CreateQuery(string sql);
     
     public IQueryable<Ability> Abilities { get; }
     public IQueryable<Champion> Champions { get; }

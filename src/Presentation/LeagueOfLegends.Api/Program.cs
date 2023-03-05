@@ -1,5 +1,6 @@
 
 
+using System.Text.Json.Serialization;
 using LeagueOfLegends.Api.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,14 @@ var configuration = builder.Configuration;
 builder.Services
     .AddPersistence(configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(x =>
+    {
+        x.JsonSerializerOptions.WriteIndented = true;
+        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
