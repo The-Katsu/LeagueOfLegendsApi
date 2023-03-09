@@ -51,13 +51,13 @@ public class UnitOfWork : IUnitOfWork
     public IStoryRepository StoryRepository => _storyRepository.Value;
 
     public void BeginTransaction() => _dbContext.BeginTransaction();
-    public async Task AddOrUpdateAsync(Entity entity) => await _dbContext.SaveAsync(entity);
+    public async Task AddOrUpdateAsync(Entity entity) => await _dbContext.SaveOrUpdateAsync(entity);
     public async Task DeleteAsync(Entity entity) => await _dbContext.DeleteAsync(entity);
     public async Task CommitAsync(CancellationToken token = default)
     {
         try
         {
-            await _dbContext.Commit(token);
+            await _dbContext.CommitAsync(token);
         }
         catch
         {

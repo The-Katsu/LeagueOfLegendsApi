@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BDAF004A-5950-450C-A5C9-AFA0BE42193B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Application", "src\Core\LeagueOfLegends.Api.Application\LeagueOfLegends.Api.Application.csproj", "{DDDCE658-BE9C-44F4-943D-9CE19448F5B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6266363-0002-4FF6-BC33-74B92C741C5B} = {A6266363-0002-4FF6-BC33-74B92C741C5B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Domain", "src\Core\LeagueOfLegends.Api.Domain\LeagueOfLegends.Api.Domain.csproj", "{00F56597-E110-42EA-B31B-353CF38A7D70}"
 EndProject

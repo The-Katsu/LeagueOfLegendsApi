@@ -11,7 +11,7 @@ public static class NHibernateMigrationsManager
         .GetDirectories().First(d => d.Name == "Migrations")
         .FullName + "/SqlMigrations";
 
-    public static bool IniCreated() => new DirectoryInfo(Path).GetFiles().Any(d => d.Extension == ".sql");
+    public static bool InitCreated() => new DirectoryInfo(Path).GetFiles().Any(d => d.Extension == ".sql");
     
     public static Action<string> InitMigration => x =>
     {

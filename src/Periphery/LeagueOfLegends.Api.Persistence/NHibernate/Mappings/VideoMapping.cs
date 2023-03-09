@@ -11,15 +11,13 @@ public class VideoMapping : ClassMapping<Video>
     {
         Table("cinematic");
         
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
 
-        Property(x => x.Title, m => m.Column("title"));
+        Property(x => x.Title, m =>
+        {
+            m.Column("title");
+            m.Unique(true);
+        });
         Property(x => x.Subtitle, m => m.Column("subtitle"));
         Property(x => x.Description, m => m.Column("description"));
         Property(x => x.ImageUrl, m => m.Column("image_url"));

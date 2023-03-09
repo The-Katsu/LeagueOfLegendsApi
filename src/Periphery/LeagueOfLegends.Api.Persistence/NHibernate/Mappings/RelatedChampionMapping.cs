@@ -11,13 +11,7 @@ public class RelatedChampionMapping : ClassMapping<RelatedChampion>
     {
         Table("related_champion");
 
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
         
         ManyToOne(x => x.Champion,
             m =>

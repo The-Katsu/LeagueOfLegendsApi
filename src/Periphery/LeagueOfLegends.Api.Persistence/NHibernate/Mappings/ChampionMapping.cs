@@ -2,6 +2,7 @@
 using NHibernate;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
+using NHibernate.Type;
 
 namespace LeagueOfLegends.Api.Persistence.NHibernate.Mappings;
 
@@ -11,19 +12,22 @@ public class ChampionMapping : ClassMapping<Champion>
     {
         Table("champion");
         
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
         
         Property(x => x.AnimatedImageUrl, m => m.Column("animated_image_url"));
         Property(x => x.ImageUrl, m => m.Column("image_url"));
-        Property(x => x.Name, m => m.Column("name"));
+        Property(x => x.Name, m =>
+        {
+            m.Column("name");
+            m.Unique(true);
+        });
+        Property(x => x.ReleaseDate, m => m.Column("release_date"));
         Property(x => x.Nickname, m => m.Column("nickname"));
-        Property(x => x.Biography, m => m.Column("biography"));
+        Property(x => x.Biography, m =>
+        {
+            m.Column("biography");
+            m.Type(NHibernateUtil.StringClob);
+        });
         
         ManyToOne(x => x.Region, m =>
         {

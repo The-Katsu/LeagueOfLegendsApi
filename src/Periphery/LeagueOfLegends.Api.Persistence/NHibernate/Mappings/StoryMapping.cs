@@ -11,21 +11,23 @@ public class StoryMapping : ClassMapping<Story>
     {
         Table("story");
         
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
         
         Property(x => x.ReleaseDate, m => m.Column("release_date"));
-        Property(x => x.Title, m => m.Column("title"));
+        Property(x => x.Title, m =>
+        {
+            m.Column("title");
+            m.Unique(true);
+        });
         Property(x => x.WordCount, m => m.Column("word_count"));
         Property(x => x.MinutesToRead, m => m.Column("minutes_to_read"));
         Property(x => x.Subtitle, m => m.Column("subtitle"));
         Property(x => x.ImageUrl, m => m.Column("image_url"));
-        Property(x => x.Content, m => m.Column("content"));
+        Property(x => x.Content, m =>
+        {
+            m.Column("content");
+            m.Type(NHibernateUtil.StringClob);
+        });
         
         Set(x => x.FeaturedChampions,
             m =>

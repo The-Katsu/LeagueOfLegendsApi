@@ -1,4 +1,5 @@
 ﻿using LeagueOfLegends.Api.Persistence.NHibernate.Extensions;
+using LeagueOfLegends.Api.Persistence.Quartz.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +11,7 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("LolDbPgsqlConnection");
         services.AddNHibernate(connectionString!);
-        
+        services.AddQuartz();   
         return services;
     }
 }

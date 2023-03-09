@@ -11,17 +11,19 @@ public class RegionMapping : ClassMapping<Region>
     {
         Table("region");
         
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
         
-        Property(x => x.Name, m => m.Column("name"));
+        Property(x => x.Name, m =>
+        {
+            m.Column("name");
+            m.Unique(true);
+        });
         Property(x => x.ImageUrl, m => m.Column("image_url"));
-        Property(x => x.Overview, m => m.Column("overview"));
+        Property(x => x.Overview, m =>
+        {
+            m.Column("overview");
+            m.Type(NHibernateUtil.StringClob);
+        });
         Property(x => x.AnimatedImageUrl, m => m.Column("animated_image_url"));
         
         Set(x => x.AssociatedChampions,

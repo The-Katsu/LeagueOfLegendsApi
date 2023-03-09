@@ -1,164 +1,167 @@
 
-    drop table if exists ability cascade
+    drop table ability cascade
 
-    drop table if exists champion cascade
+    drop table champion cascade
 
-    drop table if exists champion_comic cascade
+    drop table champion_comic cascade
 
-    drop table if exists champion_story cascade
+    drop table champion_story cascade
 
-    drop table if exists champion_video cascade
+    drop table champion_video cascade
 
-    drop table if exists champion_races cascade
+    drop table champion_races cascade
 
-    drop table if exists champion_roles cascade
+    drop table champion_roles cascade
 
-    drop table if exists comic cascade
+    drop table comic cascade
 
-    drop table if exists race cascade
+    drop table race cascade
 
-    drop table if exists region cascade
+    drop table region cascade
 
-    drop table if exists related_champion cascade
+    drop table related_champion cascade
 
-    drop table if exists related_story cascade
+    drop table related_story cascade
 
-    drop table if exists role cascade
+    drop table role cascade
 
-    drop table if exists skin cascade
+    drop table skin cascade
 
-    drop table if exists story cascade
+    drop table story cascade
 
-    drop table if exists cinematic cascade
+    drop table cinematic cascade
+
+    drop sequence hibernate_sequence
 
     create table ability (
-        id uuid not null,
-       description varchar(255),
+        Id int4 not null,
+       description text,
        icon_url varchar(255),
-       name varchar(255),
+       name varchar(255) unique,
        mp4_url varchar(255),
        webm_url varchar(255),
-       champion_id uuid,
-       primary key (id)
+       champion_id int4,
+       primary key (Id)
     )
 
     create table champion (
-        id uuid not null,
+        Id int4 not null,
        image_url varchar(255),
        animated_image_url varchar(255),
-       name varchar(255),
+       name varchar(255) unique,
        nickname varchar(255),
-       biography varchar(255),
-       region_id uuid,
-       primary key (id)
+       biography text,
+       release_date timestamp,
+       region_id int4,
+       primary key (Id)
     )
 
     create table champion_comic (
-        comic_id uuid not null,
-       champion_id uuid not null,
+        comic_id int4 not null,
+       champion_id int4 not null,
        primary key (champion_id, comic_id)
     )
 
     create table champion_story (
-        story_id uuid not null,
-       champion_id uuid not null,
+        story_id int4 not null,
+       champion_id int4 not null,
        primary key (champion_id, story_id)
     )
 
     create table champion_video (
-        video_id uuid not null,
-       champion_id uuid not null,
+        video_id int4 not null,
+       champion_id int4 not null,
        primary key (champion_id, video_id)
     )
 
     create table champion_races (
-        champion_id uuid not null,
-       race_id uuid not null,
+        champion_id int4 not null,
+       race_id int4 not null,
        primary key (race_id, champion_id)
     )
 
     create table champion_roles (
-        champion_id uuid not null,
-       role_id uuid not null,
+        champion_id int4 not null,
+       role_id int4 not null,
        primary key (role_id, champion_id)
     )
 
     create table comic (
-        id uuid not null,
-       title varchar(255),
+        Id int4 not null,
+       title varchar(255) unique,
        series varchar(255),
        pages varchar(255),
        scaled_pages varchar(255),
        credits varchar(255),
-       description varchar(255),
-       primary key (id)
+       description text,
+       primary key (Id)
     )
 
     create table race (
-        id uuid not null,
-       name varchar(255),
-       primary key (id)
+        Id int4 not null,
+       name varchar(255) unique,
+       primary key (Id)
     )
 
     create table region (
-        id uuid not null,
-       name varchar(255),
+        Id int4 not null,
+       name varchar(255) unique,
        image_url varchar(255),
        animated_image_url varchar(255),
-       overview varchar(255),
-       primary key (id)
+       overview text,
+       primary key (Id)
     )
 
     create table related_champion (
-        id uuid not null,
-       champion_id uuid,
-       related_champion_id uuid,
-       primary key (id)
+        Id int4 not null,
+       champion_id int4,
+       related_champion_id int4,
+       primary key (Id)
     )
 
     create table related_story (
-        id uuid not null,
-       champion_id uuid,
-       story_id uuid,
-       primary key (id)
+        Id int4 not null,
+       champion_id int4,
+       story_id int4,
+       primary key (Id)
     )
 
     create table role (
-        id uuid not null,
-       name varchar(255),
-       primary key (id)
+        Id int4 not null,
+       name varchar(255) unique,
+       primary key (Id)
     )
 
     create table skin (
-        id uuid not null,
+        Id int4 not null,
        name varchar(255),
        image_url varchar(255),
-       champion_id uuid,
-       primary key (id)
+       champion_id int4,
+       primary key (Id)
     )
 
     create table story (
-        id uuid not null,
+        Id int4 not null,
        release_date timestamp,
-       title varchar(255),
+       title varchar(255) unique,
        word_count int4,
        minutes_to_read int4,
        subtitle varchar(255),
        image_url varchar(255),
-       content varchar(255),
-       region_id uuid,
-       primary key (id)
+       content text,
+       region_id int4,
+       primary key (Id)
     )
 
     create table cinematic (
-        id uuid not null,
-       title varchar(255),
+        Id int4 not null,
+       title varchar(255) unique,
        subtitle varchar(255),
        description varchar(255),
        image_url varchar(255),
        url varchar(255),
        type varchar(255),
-       primary key (id)
+       primary key (Id)
     )
 
     alter table ability 
@@ -250,3 +253,5 @@
         add constraint FK_C4B86FBB 
         foreign key (region_id) 
         references region
+
+    create sequence hibernate_sequence

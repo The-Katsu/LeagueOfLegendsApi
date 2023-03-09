@@ -11,17 +11,19 @@ public class AbilityMapping : ClassMapping<Ability>
     {
         Table("ability");
         
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
         
-        Property(x => x.Description, m => m.Column("description"));
+        Property(x => x.Description, m =>
+        {
+            m.Column("description");
+            m.Type(NHibernateUtil.StringClob);
+        });
         Property(x => x.IconUrl, m => m.Column("icon_url"));
-        Property(x => x.Name, m => m.Column("name"));
+        Property(x => x.Name, m =>
+        {
+            m.Column("name");
+            m.Unique(true);
+        });
         Property(x => x.Mp4Url, m => m.Column("mp4_url"));
         Property(x => x.WebmUrl, m => m.Column("webm_url"));
         

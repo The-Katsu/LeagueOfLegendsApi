@@ -13,5 +13,5 @@ public abstract class GenericRepository<T> : IRepository<T> where T : Entity
     protected GenericRepository(INHibernateDbContext dbContext) => DbContext = dbContext;
 
     public virtual async Task<IList<T>> GetListAsync() => await DbContext.Query<T>().ToListAsync();
-    public virtual async Task<T> GetByIdAsync(Guid id) => await DbContext.GetByIdAsync<T>(id);
+    public virtual async Task<T> GetByIdAsync(int id) => await DbContext.GetByIdAsync<T>(id);
 }

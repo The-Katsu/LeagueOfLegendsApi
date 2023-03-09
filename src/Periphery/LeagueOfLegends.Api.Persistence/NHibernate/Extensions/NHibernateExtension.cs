@@ -9,18 +9,18 @@ using Configuration = NHibernate.Cfg.Configuration;
 
 namespace LeagueOfLegends.Api.Persistence.NHibernate.Extensions;
 
-public static class NHibernateExtensions
+public static class NHibernateExtension
 {
     public static IServiceCollection AddNHibernate(this IServiceCollection services, string connectionString)
     {
         var mapper = new ModelMapper();
-        mapper.AddMappings(typeof(NHibernateExtensions).Assembly.ExportedTypes);
+        mapper.AddMappings(typeof(NHibernateExtension).Assembly.ExportedTypes);
         var hbmMapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
         var configuration = new Configuration();
         configuration.DataBaseIntegration(p =>
         {
-            p.Dialect<PostgreSQL82Dialect>();
+            p.Dialect<PostgreSQLDialect>();
             p.ConnectionString = connectionString;
             p.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
             p.SchemaAction = SchemaAutoAction.Validate;
@@ -32,7 +32,7 @@ public static class NHibernateExtensions
         configuration.AddMapping(hbmMapping);
 
 #if DEBUG
-        if(!NHibernateMigrationsManager.IniCreated()) 
+        if(!NHibernateMigrationsManager.InitCreated()) 
             new SchemaExport(configuration).Create(NHibernateMigrationsManager.InitMigration, true);
         else
             new SchemaUpdate(configuration).Execute(NHibernateMigrationsManager.UpdateMigration, true);

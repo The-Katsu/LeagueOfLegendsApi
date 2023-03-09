@@ -11,20 +11,22 @@ public class ComicMapping : ClassMapping<Comic>
     {
         Table("comic");
         
-        Id(x => x.Id, m =>
-        {
-            m.Generator(Generators.Guid);
-            m.Type(NHibernateUtil.Guid);
-            m.Column("id");
-            m.UnsavedValue(Guid.Empty);
-        });
+        Id(x => x.Id, m => m.Generator(Generators.Identity));
 
-        Property(x => x.Title, m => m.Column("title"));
+        Property(x => x.Title, m =>
+        {
+            m.Column("title");
+            m.Unique(true);
+        });
         Property(x => x.Series, m => m.Column("series"));
         Property(x => x.Pages, m => m.Column("pages"));
         Property(x => x.ScaledPages, m => m.Column("scaled_pages"));
         Property(x => x.Credits, m => m.Column("credits"));
-        Property(x => x.Description, m => m.Column("description"));
+        Property(x => x.Description, m =>
+        {
+            m.Column("description");
+            m.Type(NHibernateUtil.StringClob);
+        });
         
         Set(x => x.FeaturedChampions,
             m =>
