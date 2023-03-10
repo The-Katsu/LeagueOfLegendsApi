@@ -17,7 +17,7 @@ public class RelatedChampionMapping : ClassMapping<RelatedChampion>
             m =>
             {
                 m.Column("champion_id");
-                m.Cascade(Cascade.Persist);
+                m.Cascade(Cascade.All);
             });
     }
 }

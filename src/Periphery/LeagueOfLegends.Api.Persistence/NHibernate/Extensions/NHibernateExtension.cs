@@ -30,7 +30,7 @@ public static class NHibernateExtension
 #endif
         });
         configuration.AddMapping(hbmMapping);
-
+        
 #if DEBUG
         if(!NHibernateMigrationsManager.InitCreated()) 
             new SchemaExport(configuration).Create(NHibernateMigrationsManager.InitMigration, true);

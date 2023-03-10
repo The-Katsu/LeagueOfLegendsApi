@@ -33,4 +33,10 @@ public static class JTokenExtensions
 
     public static string GetStringValue(this JToken token) =>
         token.Value<string>()!;
+
+    public static JToken GetRelatedChampions(this JToken token) =>
+        token.Parent!.Parent!["related-champions"]!;
+
+    public static string GetRelatedChampionName(this JToken token) =>
+        token["name"]!.GetStringValue();
 }

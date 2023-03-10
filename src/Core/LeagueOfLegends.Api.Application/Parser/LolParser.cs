@@ -28,7 +28,9 @@ public class LolParser : ILolParser
     
     public async Task ParseChampions()
     {
-        Console.WriteLine("executed");
+        Console.WriteLine("Job executed");
+        return;
+        
         var universeChampionsData = await _httpClient.GetDataAsync(Uris.AllUniverseChampionsUrl);
         var gameChampionsData = await _httpClient.GetDataAsync(Uris.AllGameChampionUrl);
 
@@ -180,6 +182,26 @@ public class LolParser : ILolParser
                     await _raceRepository.GetByNameAsync(race.Name));
             
             await _unitOfWork.AddOrUpdateAsync(value);
+            await _unitOfWork.CommitAsync();
+        }
+
+        var relatedChampionsDictionary = new Dictionary<string, List<string>>();
+        foreach (var (key, value) in championsData)
+        {
+            var relatedChampionsToken = value.universeJObject.GetRelatedChampions();
+            var names = relatedChampionsToken.Select(token => token.GetRelatedChampionName()).ToList();
+            relatedChampionsDictionary.Add(key, names);
+        }
+        foreach (var (key, value) in championsDictionary)
+        {
+            _unitOfWork.BeginTransaction();
+            var champion = await _championRepository.GetByNameAsync(value.Name);
+            foreach (var name in relatedChampionsDictionary[key])
+            {
+                var relatedChampion = new RelatedChampion {Champion = await _championRepository.GetByNameAsync(name)};
+                champion.RelatedChampions.Add(relatedChampion);
+            }
+            await _unitOfWork.AddOrUpdateAsync(champion);
             await _unitOfWork.CommitAsync();
         }
     }

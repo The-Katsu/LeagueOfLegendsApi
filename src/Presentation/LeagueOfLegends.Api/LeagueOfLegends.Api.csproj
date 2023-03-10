@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="5.8.0" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
@@ -14,10 +16,6 @@
     <ProjectReference Include="..\..\Core\LeagueOfLegends.Api.Application\LeagueOfLegends.Api.Application.csproj" />
     <ProjectReference Include="..\..\Periphery\LeagueOfLegends.Api.Infrastructure\LeagueOfLegends.Api.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Periphery\LeagueOfLegends.Api.Persistence\LeagueOfLegends.Api.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers" />
   </ItemGroup>
 
 </Project>

@@ -19,4 +19,10 @@
     <ProjectReference Include="..\LeagueOfLegends.Api.Domain\LeagueOfLegends.Api.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore">
+      <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\6.0.14\Microsoft.AspNetCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

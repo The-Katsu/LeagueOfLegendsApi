@@ -29,6 +29,7 @@ public class RegionMapping : ClassMapping<Region>
         Set(x => x.AssociatedChampions,
             m =>
             {
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("region_id"));
                 m.Lazy(CollectionLazy.Lazy);
             },
@@ -36,6 +37,7 @@ public class RegionMapping : ClassMapping<Region>
         Set(x => x.RelatedStories,
             m =>
             {
+                m.Cascade(Cascade.All);
                 m.Key(k => k.Column("story_id"));
                 m.Lazy(CollectionLazy.Lazy);
             },

@@ -91,6 +91,7 @@ public class ChampionMapping : ClassMapping<Champion>
             {
                 m.Key(k => k.Column("champion_id"));
                 m.Lazy(CollectionLazy.Lazy);
+                m.Cascade(Cascade.All);
             },
             r => r.OneToMany());
         Set(x => x.RelatedChampions,
@@ -98,6 +99,7 @@ public class ChampionMapping : ClassMapping<Champion>
             {
                 m.Key(k => k.Column("related_champion_id"));
                 m.Lazy(CollectionLazy.Lazy);
+                m.Cascade(Cascade.All);
             },
             r => r.OneToMany());
         Set(x => x.Abilities,
@@ -105,6 +107,7 @@ public class ChampionMapping : ClassMapping<Champion>
             {
                 m.Key(k => k.Column("champion_id"));
                 m.Lazy(CollectionLazy.Lazy);
+                m.Cascade(Cascade.All);
             },
             r => r.OneToMany());
     }

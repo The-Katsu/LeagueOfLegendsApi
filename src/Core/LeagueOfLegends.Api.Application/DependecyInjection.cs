@@ -1,4 +1,6 @@
 ﻿using LeagueOfLegends.Api.Application.Parser;
+using LeagueOfLegends.Api.Application.Services.Implementations;
+using LeagueOfLegends.Api.Application.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +15,9 @@ public static class DependencyInjection
         {
             client.DefaultRequestHeaders.Add("User-Agent", "My-Agent");
         });
+
+        services.AddScoped<IChampionService, ChampionService>();
+        
         return services;
     }
 }
