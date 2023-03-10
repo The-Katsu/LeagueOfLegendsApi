@@ -11,7 +11,7 @@ public class RaceMapping : ClassMapping<Race>
     {
         Table("race");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         Property(x => x.Name, m =>
         {

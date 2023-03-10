@@ -2,7 +2,6 @@
 
 public class ChampionAbilityResponse
 {
-    public int Id { get; init; } 
     public string Description { get; init; } = null!;
     public string IconUrl { get; init; } = null!;
     public string Mp4Url { get; init; } = null!;

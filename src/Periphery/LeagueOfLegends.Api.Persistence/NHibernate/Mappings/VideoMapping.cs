@@ -11,7 +11,7 @@ public class VideoMapping : ClassMapping<Video>
     {
         Table("cinematic");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
 
         Property(x => x.Title, m =>
         {

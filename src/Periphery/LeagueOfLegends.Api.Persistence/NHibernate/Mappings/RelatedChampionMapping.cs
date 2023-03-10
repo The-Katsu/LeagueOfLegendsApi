@@ -11,7 +11,7 @@ public class RelatedChampionMapping : ClassMapping<RelatedChampion>
     {
         Table("related_champion");
 
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         ManyToOne(x => x.Champion,
             m =>

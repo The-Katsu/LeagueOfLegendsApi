@@ -11,7 +11,7 @@ public class AbilityMapping : ClassMapping<Ability>
     {
         Table("ability");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         Property(x => x.Description, m =>
         {

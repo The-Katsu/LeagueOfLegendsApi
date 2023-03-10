@@ -11,7 +11,7 @@ public class RoleMapping : ClassMapping<Role>
     {
         Table("role");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         Property(x => x.Name, m =>
         {

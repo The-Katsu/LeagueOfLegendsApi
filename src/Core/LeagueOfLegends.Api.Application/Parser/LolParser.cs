@@ -28,9 +28,6 @@ public class LolParser : ILolParser
     
     public async Task ParseChampions()
     {
-        Console.WriteLine("Job executed");
-        return;
-        
         var universeChampionsData = await _httpClient.GetDataAsync(Uris.AllUniverseChampionsUrl);
         var gameChampionsData = await _httpClient.GetDataAsync(Uris.AllGameChampionUrl);
 

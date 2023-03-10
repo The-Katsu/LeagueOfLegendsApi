@@ -12,7 +12,7 @@ public class ChampionMapping : ClassMapping<Champion>
     {
         Table("champion");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         Property(x => x.AnimatedImageUrl, m => m.Column("animated_image_url"));
         Property(x => x.ImageUrl, m => m.Column("image_url"));

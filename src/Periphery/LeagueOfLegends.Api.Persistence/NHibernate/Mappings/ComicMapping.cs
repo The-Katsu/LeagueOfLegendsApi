@@ -11,7 +11,7 @@ public class ComicMapping : ClassMapping<Comic>
     {
         Table("comic");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
 
         Property(x => x.Title, m =>
         {

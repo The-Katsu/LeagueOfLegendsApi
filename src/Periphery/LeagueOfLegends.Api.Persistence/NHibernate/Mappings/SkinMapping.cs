@@ -11,7 +11,7 @@ public class SkinMapping : ClassMapping<Skin>
     {
         Table("skin");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         Property(x => x.Name, m => m.Column("name"));
         Property(x => x.ImageUrl, m => m.Column("image_url"));

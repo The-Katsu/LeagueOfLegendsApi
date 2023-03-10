@@ -11,7 +11,7 @@ public class StoryMapping : ClassMapping<Story>
     {
         Table("story");
         
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         Property(x => x.ReleaseDate, m => m.Column("release_date"));
         Property(x => x.Title, m =>

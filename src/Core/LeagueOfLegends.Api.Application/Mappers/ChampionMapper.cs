@@ -5,32 +5,29 @@ namespace LeagueOfLegends.Api.Application.Mappers;
 
 public static class ChampionMapper
 {
-    public static ChampionAbilityResponse ToChampionAbilityResponse(this Ability ability) => 
+    private static ChampionAbilityResponse ToChampionAbilityResponse(this Ability ability) => 
         new()
         {
-            Id = ability.Id,
             Description = ability.Description,
             IconUrl = ability.IconUrl,
             Mp4Url = ability.Mp4Url,
             WebmUrl = ability.WebmUrl
         };
 
-    public static ChampionRaceResponse ToChampionRaceResponse(this Race race) =>
+    private static ChampionRaceResponse ToChampionRaceResponse(this Race race) =>
         new()
         {
-            Id = race.Id,
             Name = race.Name
         };
 
-    public static ChampionSkinResponse ToChampionSkinResponse(this Skin skin) =>
+    private static ChampionSkinResponse ToChampionSkinResponse(this Skin skin) =>
         new()
         {
-            Id = skin.Id,
             Name = skin.Name,
             ImageUrl = skin.ImageUrl
         };
 
-    public static ChampionRelatedChampionResponse
+    private static ChampionRelatedChampionResponse
         ToChampionRelatedChampionResponse(this RelatedChampion relatedChampion) =>
         new()
         {
@@ -38,7 +35,13 @@ public static class ChampionMapper
             Name = relatedChampion.Champion.Name
         };
 
-    public static ChampionResponse ToChampionResponse(this Champion champion) =>
+    private static ChampionRoleResponse ToChampionRoleResponse(this Role role) =>
+        new()
+        {
+            Name = role.Name
+        };
+
+    public static ChampionResponseWithDetails ToChampionResponseWithDetails(this Champion champion) =>
         new()
         {
             Id = champion.Id,
@@ -48,9 +51,18 @@ public static class ChampionMapper
             ImageUrl = champion.ImageUrl,
             Biography = champion.Biography,
             ReleaseDate = champion.ReleaseDate,
+            Roles = champion.Roles.Select(ToChampionRoleResponse).ToList(),
             Abilities = champion.Abilities.Select(ToChampionAbilityResponse).ToList(),
             Races = champion.Races.Select(ToChampionRaceResponse).ToList(),
             Skins = champion.Skins.Select(ToChampionSkinResponse).ToList(),
             RelatedChampions = champion.RelatedChampions.Select(ToChampionRelatedChampionResponse).ToList()
+        };
+    
+    public static ChampionResponse ToChampionResponse(this Champion champion) =>
+        new()
+        {
+            Id = champion.Id,
+            Name = champion.Name,
+            ImageUrl = champion.ImageUrl
         };
 }

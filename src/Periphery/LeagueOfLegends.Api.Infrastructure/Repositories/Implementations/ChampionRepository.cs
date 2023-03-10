@@ -28,4 +28,9 @@ public class ChampionRepository : GenericRepository<Champion>, IChampionReposito
     public async Task<Champion> GetByNameAsync(string name) => 
         await DbContext.Query<Champion>()
             .FirstOrDefaultAsync(x => x.Name == name);
+
+    public override async Task<IList<Champion>> GetListAsync() => 
+        await DbContext.Query<Champion>()
+            .OrderBy(x => x.Name)
+            .ToListAsync();
 }

@@ -11,7 +11,7 @@ public class RelatedStoryMapping : ClassMapping<RelatedStory>
     {
         Table("related_story");
 
-        Id(x => x.Id, m => m.Generator(Generators.Identity));
+        Id(x => x.Id, m => m.Generator(Generators.Native));
         
         ManyToOne(x => x.Story,
             m =>
