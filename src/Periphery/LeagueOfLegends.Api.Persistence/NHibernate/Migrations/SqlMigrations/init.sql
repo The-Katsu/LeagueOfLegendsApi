@@ -21,8 +21,6 @@
 
     drop table related_champion cascade
 
-    drop table related_story cascade
-
     drop table role cascade
 
     drop table skin cascade
@@ -57,21 +55,21 @@
     )
 
     create table champion_comic (
-        comic_id int4 not null,
-       champion_id int4 not null,
-       primary key (champion_id, comic_id)
+        champion_id int4 not null,
+       comic_id int4 not null,
+       primary key (comic_id, champion_id)
     )
 
     create table champion_story (
-        story_id int4 not null,
-       champion_id int4 not null,
-       primary key (champion_id, story_id)
+        champion_id int4 not null,
+       story_id int4 not null,
+       primary key (story_id, champion_id)
     )
 
     create table champion_video (
-        video_id int4 not null,
-       champion_id int4 not null,
-       primary key (champion_id, video_id)
+        champion_id int4 not null,
+       video_id int4 not null,
+       primary key (video_id, champion_id)
     )
 
     create table champion_races (
@@ -89,10 +87,9 @@
     create table comic (
         Id int4 not null,
        title varchar(255) unique,
-       series varchar(255),
-       pages varchar(255),
-       scaled_pages varchar(255),
-       credits varchar(255),
+       url varchar(255),
+       content text,
+       credits text,
        description text,
        primary key (Id)
     )
@@ -119,13 +116,6 @@
        primary key (Id)
     )
 
-    create table related_story (
-        Id int4 not null,
-       champion_id int4,
-       story_id int4,
-       primary key (Id)
-    )
-
     create table role (
         Id int4 not null,
        name varchar(255) unique,
@@ -148,15 +138,14 @@
        minutes_to_read int4,
        subtitle varchar(255),
        image_url varchar(255),
+       url varchar(255),
        content text,
-       region_id int4,
        primary key (Id)
     )
 
     create table cinematic (
         Id int4 not null,
        title varchar(255) unique,
-       subtitle varchar(255),
        description varchar(255),
        image_url varchar(255),
        url varchar(255),
@@ -175,33 +164,33 @@
         references region
 
     alter table champion_comic 
-        add constraint FK_4D44E9DC 
-        foreign key (champion_id) 
+        add constraint FK_61004C3D 
+        foreign key (comic_id) 
         references comic
 
     alter table champion_comic 
-        add constraint FK_27A75AF0 
-        foreign key (comic_id) 
+        add constraint FK_43F92BC6 
+        foreign key (champion_id) 
         references champion
 
     alter table champion_story 
-        add constraint FK_C66D2DBC 
-        foreign key (champion_id) 
+        add constraint FK_BFFD538F 
+        foreign key (story_id) 
         references story
 
     alter table champion_story 
-        add constraint FK_448D07AB 
-        foreign key (story_id) 
+        add constraint FK_C2736032 
+        foreign key (champion_id) 
         references champion
 
     alter table champion_video 
-        add constraint FK_9F4E4D58 
-        foreign key (champion_id) 
+        add constraint FK_FBE8D0D4 
+        foreign key (video_id) 
         references cinematic
 
     alter table champion_video 
-        add constraint FK_51C5E00F 
-        foreign key (video_id) 
+        add constraint FK_95431E02 
+        foreign key (champion_id) 
         references champion
 
     alter table champion_races 
@@ -234,24 +223,9 @@
         foreign key (related_champion_id) 
         references champion
 
-    alter table related_story 
-        add constraint FK_5856CC23 
-        foreign key (champion_id) 
-        references story
-
-    alter table related_story 
-        add constraint FK_C364CF79 
-        foreign key (story_id) 
-        references region
-
     alter table skin 
         add constraint FK_BCE54059 
         foreign key (champion_id) 
         references champion
-
-    alter table story 
-        add constraint FK_C4B86FBB 
-        foreign key (region_id) 
-        references region
 
     create sequence hibernate_sequence

@@ -18,7 +18,6 @@ public class VideoMapping : ClassMapping<Video>
             m.Column("title");
             m.Unique(true);
         });
-        Property(x => x.Subtitle, m => m.Column("subtitle"));
         Property(x => x.Description, m => m.Column("description"));
         Property(x => x.ImageUrl, m => m.Column("image_url"));
         Property(x => x.Url, m => m.Column("url"));
@@ -28,11 +27,11 @@ public class VideoMapping : ClassMapping<Video>
             m =>
             {
                 m.Cascade(Cascade.All);
-                m.Key(k => k.Column("champion_id"));
+                m.Key(k => k.Column("video_id"));
                 m.Table("champion_video");
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => 
-                r.ManyToMany(m => m.Column("video_id")));
+                r.ManyToMany(m => m.Column("champion_id")));
     }
 }

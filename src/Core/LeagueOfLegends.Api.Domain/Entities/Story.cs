@@ -10,8 +10,8 @@ public class Story : Entity
     public virtual int MinutesToRead { get; set; }
     public virtual string Subtitle { get; set; } = null!;
     public virtual string ImageUrl { get; set; } = null!;
+    public virtual string Url { get; set; } = null!;
     public virtual string Content { get; set; } = null!;
 
-    public virtual Region Region { get; set; } = null!;
     public virtual ISet<Champion> FeaturedChampions { get; set; } = new HashSet<Champion>();
 }

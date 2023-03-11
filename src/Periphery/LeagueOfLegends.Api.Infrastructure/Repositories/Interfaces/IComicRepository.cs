@@ -4,5 +4,5 @@ namespace LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 public interface IComicRepository : IRepository<Comic>
 {
-    
+    public Task<List<string>> GetTitlesAsync();
 }

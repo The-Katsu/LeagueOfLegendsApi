@@ -1,7 +1,7 @@
-﻿using LeagueOfLegends.Api.Application.Contracts.Responses;
-using LeagueOfLegends.Api.Application.Contracts.Responses.Champion;
-using LeagueOfLegends.Api.Application.Mappers;
+﻿using LeagueOfLegends.Api.Application.Mappers;
 using LeagueOfLegends.Api.Application.Services.Interfaces;
+using LeagueOfLegends.Api.Domain.Contracts.Responses;
+using LeagueOfLegends.Api.Domain.Contracts.Responses.Champion;
 using LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 namespace LeagueOfLegends.Api.Application.Services.Implementations;
@@ -12,19 +12,17 @@ public class ChampionService : IChampionService
     
     public ChampionService(IChampionRepository championRepository) => _championRepository = championRepository;
 
-    public async Task<ArrayResponse<ChampionResponse>> GetAllWithDetailsAsync()
+    public async Task<ArrayResponse<ChampionResponse>> GetAllAsync()
     {
         var champions = await _championRepository.GetListAsync();
-        var response = new ArrayResponse<ChampionResponse>
-        {
-            Results = champions
+        var response = new ArrayResponse<ChampionResponse>(results: 
+            champions
                 .Select(ChampionMapper.ToChampionResponse)
-                .ToList()
-        };
+                .ToList());
         return response;
     }
 
-    public async Task<ArrayResponseWithInfo<ChampionResponse>> GetPageWithDetailsAsync(int page)
+    public async Task<ArrayResponseWithInfo<ChampionResponse>> GetPageAsync(int page)
     {
         var champions = await _championRepository.GetChampionsPageAsync(page - 1);
         var count = await _championRepository.GetChampionsCountAsync();
@@ -51,7 +49,7 @@ public class ChampionService : IChampionService
     {
         var champion = await _championRepository.GetByIdAsync(id);
         var response = champion is not null ? 
-            new SingleResponse<ChampionResponseWithDetails> {Result = champion.ToChampionResponseWithDetails()} :
+            new SingleResponse<ChampionResponseWithDetails>(result: champion.ToChampionResponseWithDetails()) :
             null;
         return response!;
     }

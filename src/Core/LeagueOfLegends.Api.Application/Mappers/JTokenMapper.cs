@@ -1,5 +1,5 @@
-﻿using LeagueOfLegends.Api.Application.Parser.Extensions;
-using LeagueOfLegends.Api.Application.Utils;
+﻿using LeagueOfLegends.Api.Application.Jobs.Crawler.Parser.Constants;
+using LeagueOfLegends.Api.Application.Jobs.Crawler.Parser.Extensions;
 using LeagueOfLegends.Api.Domain.Entities;
 using Newtonsoft.Json.Linq;
 
@@ -25,11 +25,24 @@ public static class JTokenMapper
         try
         {
             token = childesChain.Aggregate(token, (current, child) => current[child]!);
-            return token.Value<DateTime>();
+            return token.Value<DateTime>().ToUniversalTime();
         }
         catch
         {
-            return new DateTime();
+            return new DateTime().ToUniversalTime();
+        }
+    }
+
+    private static int TryGetInt(JToken token, IEnumerable<string> childesChain)
+    {
+        try
+        {
+            token = childesChain.Aggregate(token, (current, child) => current[child]!);
+            return token.Value<int>();
+        }
+        catch
+        {
+            return 0;
         }
     }
     
@@ -40,9 +53,7 @@ public static class JTokenMapper
             Nickname = TryGetString(universeToken, new[] {"title"}),
             ImageUrl = TryGetString(universeToken, new[] {"image","uri"}),
             AnimatedImageUrl = TryGetString(universeToken, new[] {"video","uri"}),
-            Biography = TryGetString(universeToken, new[] {"biography","full"}) is not null ?
-                HtmlUtility.GetPlaintText(TryGetString(universeToken, new[] {"biography","full"})) :
-                null!,
+            Biography = TryGetString(universeToken, new[] {"biography","full"}),
             ReleaseDate = TryGetDateTime(universeToken, new []{"release-date"})
         };
 
@@ -113,5 +124,47 @@ public static class JTokenMapper
         new()
         {
             Name = TryGetString(universeToken, new []{"name"})
+        };
+
+    public static Story MapStory(JToken token, JObject jObject) =>
+        new()
+        {
+            ReleaseDate = TryGetDateTime(token, new[] {"release-date"}),
+            Title = TryGetString(token, new[] {"title"}),
+            WordCount = TryGetInt(jObject.ToObject<JToken>()!, new[] {"word-count"}),
+            Url = Uris.ExplorerItemUriAtSite(TryGetString(token, new[] {"url"}) ?? ""),
+            MinutesToRead = TryGetInt(token, new[] {"minutes-to-read"}),
+            Subtitle = TryGetString(token,new[] {"subtitle"}),
+            ImageUrl = TryGetString(token, new[] {"featured-image","uri"}),
+            Content = ""
+        };
+
+    public static Video MapVideo(JToken token) =>
+        new()
+        {
+            Title = token["title"]!.GetStringValue(),
+            Description = token["description"]!.GetStringValue(),
+            ImageUrl = token["featured-image"]!["uri"]!.GetStringValue(),
+            Url = token["uri"]!.GetStringValue(),
+            Type = token["type"]!.GetStringValue()
+        };
+
+    public static Comic MapComic(JToken token) => 
+        new()
+        {
+            Title = TryGetString(token, new[] {"title"}),
+            Url = Uris.ComicSiteUrl(TryGetString(token, new [] {"url"}) ?? ""),
+            Credits = "",
+            Content = "",
+            Description = TryGetString(token, new[] {"description"})
+        };
+
+    public static Region MapRegion(JToken token) =>
+        new()
+        {
+            Name = TryGetString(token,new [] {"name"}),
+            ImageUrl = TryGetString(token, new []{"image","uri"}),
+            AnimatedImageUrl = TryGetString(token, new [] {"video","uri"}),
+            Overview = TryGetString(token, new[] {"overview","short"})
         };
 }

@@ -1,6 +1,6 @@
-﻿using LeagueOfLegends.Api.Application.Contracts.Responses;
-using LeagueOfLegends.Api.Application.Contracts.Responses.Champion;
-using LeagueOfLegends.Api.Application.Services.Interfaces;
+﻿using LeagueOfLegends.Api.Application.Services.Interfaces;
+using LeagueOfLegends.Api.Domain.Contracts.Responses;
+using LeagueOfLegends.Api.Domain.Contracts.Responses.Champion;
 using Microsoft.AspNetCore.Authorization;
 
 namespace LeagueOfLegends.Api.Endpoints.Champion;
@@ -14,7 +14,7 @@ public class GetChampions : EndpointWithoutRequest<ArrayResponse<ChampionRespons
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var response = await _championService.GetAllWithDetailsAsync();
+        var response = await _championService.GetAllAsync();
         await SendOkAsync(response, ct);
     }
 }

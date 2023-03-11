@@ -1,7 +1,7 @@
-﻿using LeagueOfLegends.Api.Application.Contracts.Requests;
-using LeagueOfLegends.Api.Application.Contracts.Responses;
-using LeagueOfLegends.Api.Application.Contracts.Responses.Champion;
-using LeagueOfLegends.Api.Application.Services.Interfaces;
+﻿using LeagueOfLegends.Api.Application.Services.Interfaces;
+using LeagueOfLegends.Api.Domain.Contracts.Requests;
+using LeagueOfLegends.Api.Domain.Contracts.Responses;
+using LeagueOfLegends.Api.Domain.Contracts.Responses.Champion;
 using Microsoft.AspNetCore.Authorization;
 
 namespace LeagueOfLegends.Api.Endpoints.Champion;

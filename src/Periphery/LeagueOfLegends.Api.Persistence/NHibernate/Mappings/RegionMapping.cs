@@ -34,13 +34,5 @@ public class RegionMapping : ClassMapping<Region>
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => r.OneToMany());
-        Set(x => x.RelatedStories,
-            m =>
-            {
-                m.Cascade(Cascade.All);
-                m.Key(k => k.Column("story_id"));
-                m.Lazy(CollectionLazy.Lazy);
-            },
-            r => r.OneToMany());
     }
 }

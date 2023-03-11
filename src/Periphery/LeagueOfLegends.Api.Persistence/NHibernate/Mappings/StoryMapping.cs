@@ -19,6 +19,7 @@ public class StoryMapping : ClassMapping<Story>
             m.Column("title");
             m.Unique(true);
         });
+        Property(x => x.Url, m => m.Column("url"));
         Property(x => x.WordCount, m => m.Column("word_count"));
         Property(x => x.MinutesToRead, m => m.Column("minutes_to_read"));
         Property(x => x.Subtitle, m => m.Column("subtitle"));
@@ -34,17 +35,10 @@ public class StoryMapping : ClassMapping<Story>
             {
                 m.Table("champion_story");
                 m.Cascade(Cascade.All);
-                m.Key(k => k.Column("champion_id"));
+                m.Key(k => k.Column("story_id"));
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => 
-                r.ManyToMany(m => m.Column("story_id")));
-        
-        ManyToOne(x => x.Region, 
-            m =>
-            {
-                m.Cascade(Cascade.All);
-                m.Column("region_id");
-            });
+                r.ManyToMany(m => m.Column("champion_id")));
     }
 }

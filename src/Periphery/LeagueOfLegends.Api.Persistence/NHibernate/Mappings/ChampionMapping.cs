@@ -57,32 +57,32 @@ public class ChampionMapping : ClassMapping<Champion>
             m =>
             {
                 m.Cascade(Cascade.All);
-                m.Key(k => k.Column("video_id"));
+                m.Key(k => k.Column("champion_id"));
                 m.Table("champion_video");
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => 
-                r.ManyToMany(m => m.Column("champion_id")));
+                r.ManyToMany(m => m.Column("video_id")));
         Set(x => x.FeaturedStories,
             m =>
             {
                 m.Table("champion_story");
                 m.Cascade(Cascade.All);
-                m.Key(k => k.Column("story_id"));
+                m.Key(k => k.Column("champion_id"));
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => 
-                r.ManyToMany(m => m.Column("champion_id")));
+                r.ManyToMany(m => m.Column("story_id")));
         Set(x => x.FeaturedComic,
             m =>
             {
                 m.Table("champion_comic");
                 m.Cascade(Cascade.All);
-                m.Key(k => k.Column("comic_id"));
+                m.Key(k => k.Column("champion_id"));
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => 
-                r.ManyToMany(m => m.Column("champion_id")));
+                r.ManyToMany(m => m.Column("comic_id")));
 
         
         

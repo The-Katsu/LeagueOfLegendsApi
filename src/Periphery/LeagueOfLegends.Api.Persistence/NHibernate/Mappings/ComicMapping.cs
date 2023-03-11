@@ -2,6 +2,7 @@
 using NHibernate;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
+using NHibernate.Tuple;
 
 namespace LeagueOfLegends.Api.Persistence.NHibernate.Mappings;
 
@@ -18,10 +19,17 @@ public class ComicMapping : ClassMapping<Comic>
             m.Column("title");
             m.Unique(true);
         });
-        Property(x => x.Series, m => m.Column("series"));
-        Property(x => x.Pages, m => m.Column("pages"));
-        Property(x => x.ScaledPages, m => m.Column("scaled_pages"));
-        Property(x => x.Credits, m => m.Column("credits"));
+        Property(x => x.Url, m => m.Column("url"));
+        Property(x => x.Content, m =>
+        {
+            m.Column("content");
+            m.Type(NHibernateUtil.StringClob);
+        });
+        Property(x => x.Credits, m =>
+        {
+            m.Column("credits");
+            m.Type(NHibernateUtil.StringClob);
+        });
         Property(x => x.Description, m =>
         {
             m.Column("description");
@@ -33,10 +41,10 @@ public class ComicMapping : ClassMapping<Comic>
             {
                 m.Table("champion_comic");
                 m.Cascade(Cascade.All);
-                m.Key(k => k.Column("champion_id"));
+                m.Key(k => k.Column("comic_id"));
                 m.Lazy(CollectionLazy.Lazy);
             },
             r => 
-                r.ManyToMany(m => m.Column("comic_id")));
+                r.ManyToMany(m => m.Column("champion_id")));
     }
 }

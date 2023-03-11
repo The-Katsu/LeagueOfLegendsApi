@@ -4,5 +4,5 @@ namespace LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 public interface IStoryRepository : IRepository<Story>
 {
-    
+    public Task<List<string>> GetTitlesAsync();
 }

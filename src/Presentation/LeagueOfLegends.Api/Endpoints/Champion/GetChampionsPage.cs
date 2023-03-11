@@ -1,8 +1,7 @@
-﻿using LeagueOfLegends.Api.Application.Contracts.Requests;
-using LeagueOfLegends.Api.Application.Contracts.Requests.Champion;
-using LeagueOfLegends.Api.Application.Contracts.Responses;
-using LeagueOfLegends.Api.Application.Contracts.Responses.Champion;
-using LeagueOfLegends.Api.Application.Services.Interfaces;
+﻿using LeagueOfLegends.Api.Application.Services.Interfaces;
+using LeagueOfLegends.Api.Domain.Contracts.Requests.Champion;
+using LeagueOfLegends.Api.Domain.Contracts.Responses;
+using LeagueOfLegends.Api.Domain.Contracts.Responses.Champion;
 using Microsoft.AspNetCore.Authorization;
 
 namespace LeagueOfLegends.Api.Endpoints.Champion;
@@ -16,7 +15,7 @@ public class GetChampionsPage : Endpoint<GetChampionsByPageRequest, ArrayRespons
 
     public override async Task HandleAsync(GetChampionsByPageRequest req, CancellationToken ct)
     {
-        var response = await _championService.GetPageWithDetailsAsync(req.Page); // well, let it be page id :)
+        var response = await _championService.GetPageAsync(req.Page);
 
         if (response.Results.Count == 0)
         {

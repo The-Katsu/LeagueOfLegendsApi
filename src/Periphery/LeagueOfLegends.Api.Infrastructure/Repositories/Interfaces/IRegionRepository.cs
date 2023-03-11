@@ -4,5 +4,5 @@ namespace LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 public interface IRegionRepository : IRepository<Region>
 {
-    
+    public Task<List<string>> GetNamesAsync();
 }
