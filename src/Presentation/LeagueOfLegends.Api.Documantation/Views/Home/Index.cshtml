@@ -2,7 +2,58 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<body class="text-center">
+
+<div></div>
+
+<div class="headline">
+    <h1 class="headline-text">League Of Legends API</h1>
+    <h2 class="headline-text">Explore game world with REST & GraphQL</h2>
 </div>
+
+
+<h3 class="explore-text">Explore Champions</h3>
+
+<section class="wrapper">
+    @foreach (var champion in ViewBag.Champions)
+    {
+        <a href="@ViewBag.ChampionUrl@champion.Id" class="card">
+            <div class="card-content">
+                <img class="card-image" src="@champion.ImageUrl" alt=""/>
+                <h4 class="card-name">@champion.Name</h4>
+            </div>
+        </a>
+    }
+</section>
+
+<h3 class="explore-text">Explore Regions</h3>
+
+<section class="wrapper">
+    @foreach (var region in ViewBag.Regions)
+    {
+        <a href="@ViewBag.RegionUrl@region.Id" class="card">
+            <div class="card-content">
+                <img class="card-image" src="@region.ImageUrl" alt=""/>
+                <h4 class="card-name">@region.Name</h4>
+            </div>
+        </a>
+    }
+</section>
+
+<h3 class="explore-text">Explore Cinematics</h3>
+
+<section class="wrapper">
+    @foreach (var video in ViewBag.Videos)
+    {
+        <a href="@ViewBag.VideoUrl@video.Id" class="card">
+            <div class="card-content">
+                <img class="card-image" src="https://img.youtube.com/vi/@video.Url/0.jpg" alt=""/>
+                <h4 class="card-name">@video.Title</h4>
+            </div>
+        </a>
+    }
+</section>
+
+<h3 class="explore-text">Read <a class="explore-ref" href="@ViewBag.StoryUrl">Stories</a> and <a class="explore-ref" href="@ViewBag.ComicUrl">Comics</a></h3>
+
+</body>

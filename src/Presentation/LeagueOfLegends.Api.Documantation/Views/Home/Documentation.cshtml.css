@@ -1,0 +1,26 @@
+﻿.text-left {
+    text-align: left;
+}
+.list {
+    font-size: 20px;
+}
+.code-block {
+    color: orange;
+    background-color: black;
+    display: inline-block;
+    border-radius: 10px
+}
+.http-method-text{
+    color: greenyellow;
+    font-style: italic;
+    font-size: 25px;
+}
+.endpoint-info {
+    color: wheat;
+    font-style: italic;
+}
+.http-response-text {
+    color: #0dcaf0;
+    font-style: italic;
+    font-size: 20px;
+}
