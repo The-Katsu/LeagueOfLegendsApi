@@ -1,0 +1,398 @@
+﻿@{
+    ViewData["Title"] = "Documentation";
+}
+
+<!DOCTYPE html>
+
+
+<body>
+<div class="text-left">
+<h1>Documentation</h1>
+<nav>
+  <h2>Content:</h2>
+  <ul class="list">
+    <li><a href="#intro">Introduction</a>
+    <li><a href="#graphql">GraphQL</a>
+    <li><a href="#rest">REST</a>
+  </ul>
+</nav>
+    
+<h2 id="intro">Introduction</h2>
+    
+<p>This documentation will help you get familiar with the resources of the League Of Legends API and show you how to make different queries, so that you can get the most out of it.</p>
+    
+
+<h2 id="graphql">GraphQL</h2>
+    
+<a href="@ViewBag.BaseUrl/graphql">@ViewBag.BaseUrl/graphql</a> <br/>
+    
+<p>New to GraphQL? check the docs <a href="https://graphql.org/learn/">here</a></p>
+    
+<h4>Example</h4>
+    
+<pre>
+    <code class="code-block">
+    query {
+        champions ( where: { name: { startsWith: "J"} } ) {            
+            totalCount,
+                items {  
+                    id,
+                    name
+                }
+            
+        }
+    }
+
+    </code>
+    </pre>
+    
+    
+<h4>Result</h4>
+    
+<pre>
+    <code class="code-block">
+    {
+        "data": {
+            "champions": {
+                "totalCount": 6,
+                "items": [
+                    {
+                    "id": 342,
+                     "name": "Jinx"
+                    },
+                    {
+                     "id": 1936,
+                     "name": "Jax"
+                    },
+                    {
+                     "id": 1955,
+                     "name": "Jarvan IV"        
+                    },
+                    {
+                     "id": 1900,
+                     "name": "Jhin"
+                    },
+                    {
+                     "id": 1915,
+                     "name": "Jayce"
+                    },
+                    {
+                     "id": 1976,
+                     "name": "Janna"
+                    }
+                ]
+            }
+        }
+    }
+    
+    </code>
+    </pre>
+    
+    
+<h2 id="rest">REST</h2>
+    
+Base url: <a href="@ViewBag.BaseUrl/api">@ViewBag.BaseUrl/api</a> <br/>
+Explore with Swagger UI: <a href="@ViewBag.BaseUrl/swagger">@ViewBag.BaseUrl/swagger</a> <br/>
+<br/>
+    
+<h4>Endpoints</h4>
+
+<h5>Champion</h5>
+
+<pre>
+<code class="code-block">
+    <span class="http-method-text">GET</span>
+    api/champion/ <span class="endpoint-info">-- get all champions</span>
+    api/champion/{id : int} <span class="endpoint-info">-- get champion by Id</span>
+    api/champion/page-{page : int} <span class="endpoint-info">-- get champions page (20 champions per page)</span>    
+ 
+</code>
+</pre>
+    
+<pre>
+<code class="code-block">
+    <span class="http-response-text">Responses</span>
+    <span class="endpoint-info">-- get all champions</span>
+    {
+      "results": [
+        {
+          "id": 0,
+          "name": "string",
+          "imageUrl": "string"
+        }
+      ]
+    }
+
+    <span class="endpoint-info">-- get champion by Id</span>
+    {
+      "result": {
+        "id": 0,
+        "name": "string",
+        "nickname": "string",
+        "imageUrl": "string",
+        "animatedImageUrl": "string",
+        "releaseDate": "2023-03-12T22:03:12.418Z",
+        "biography": "string",
+        "region": {
+          "id": 0,
+          "name": "string"
+        },
+        "abilities": [
+          {
+            "description": "string",
+            "iconUrl": "string",
+            "mp4Url": "string",
+            "webmUrl": "string"
+          }
+        ],
+        "roles": [
+          {
+            "name": "string"
+          }
+        ],
+        "races": [
+          {
+            "name": "string"
+          }
+        ],
+        "skins": [
+          {
+            "name": "string",
+            "imageUrl": "string"
+          }
+        ],
+        "relatedChampions": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ],
+        "featuredComics": [
+          {
+            "id": 0,
+            "title": "string",
+            "url": "string"
+          }
+        ],
+        "featuredStories": [
+          {
+            "id": 0,
+            "title": "string",
+            "url": "string"
+          }
+        ],
+        "featuredVideos": [
+          {
+            "id": 0,
+            "title": "string",
+            "url": "string"
+          }
+        ]
+      }
+    }
+
+    <span class="endpoint-info">-- get champions page (20 champions per page)</span>    
+ 
+    {
+      "info": {
+        "totalCount": 0,
+        "pages": 0,
+        "next": "string",
+        "prev": "string"
+      },
+      "results": [
+        {
+          "id": 0,
+          "name": "string",
+          "imageUrl": "string"
+        }
+      ]
+    }
+
+</code>
+</pre>
+    
+    
+<h5>Comic</h5>
+    
+<pre>
+<code class="code-block">
+    <span class="http-method-text">GET</span>
+    api/comic/ <span class="endpoint-info">-- get all comics</span>
+    api/comic/{id : int} <span class="endpoint-info">-- get comic by Id</span>    
+  
+</code>
+</pre>
+
+<pre>
+<code class="code-block">
+    <span class="http-response-text">Responses</span>
+    <span class="endpoint-info">-- get all comics</span>
+    {
+      "results": [
+        {
+          "id": 0,
+          "title": "string",
+          "url": "string"
+        }
+      ]
+    }
+
+    <span class="endpoint-info">-- get comic by Id</span>    
+    {
+      "result": {
+        "id": 0,
+        "title": "string",
+        "description": "string",
+        "url": "string",
+        "credits": [
+          "string"
+        ],
+        "content": [
+          "string"
+        ],
+        "featuredChampions": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ]
+      }
+    }
+</code>
+</pre>
+    
+<h5>Region</h5>
+    
+<pre>
+<code class="code-block">
+    <span class="http-method-text">GET</span>
+    api/region/ <span class="endpoint-info">-- get all regions</span>
+    api/region/{id : int} <span class="endpoint-info">-- get region by Id</span>    
+  
+</code>
+</pre>
+
+<pre>
+<code class="code-block">
+    <span class="http-response-text">Responses</span>
+    <span class="endpoint-info">-- get all regions</span>
+    {
+      "results": [
+        {
+          "id": 0,
+          "name": "string",
+          "imageUrl": "string"
+        }
+      ]
+    }
+
+    <span class="endpoint-info">-- get region by Id</span>    
+    {
+      "result": {
+        "id": 0,
+        "name": "string",
+        "imageUrl": "string",
+        "animatedImageUrl": "string",
+        "overview": "string",
+        "associatedChampions": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ]
+      }
+    }
+</code>
+</pre>
+    
+<h5>Story</h5>
+    
+<pre>
+<code class="code-block">
+    <span class="http-method-text">GET</span>
+    api/story/ <span class="endpoint-info">-- get all stories</span>
+    api/story/{id : int} <span class="endpoint-info">-- get story by Id</span>    
+  
+</code>
+</pre>
+    
+<pre>
+<code class="code-block">
+    <span class="http-response-text">Responses</span>
+    <span class="endpoint-info">-- get all stories</span>
+    {
+      "results": [
+        {
+          "id": 0,
+          "title": "string",
+          "url": "string"
+        }
+      ]
+    }
+
+    <span class="endpoint-info">-- get story by Id</span>    
+    {
+      "result": {
+        "id": 0,
+        "title": "string",
+        "subtitle": "string",
+        "releaseDate": "string",
+        "imageUrl": "string",
+        "url": "string",
+        "content": "string",
+        "featuredChampions": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ]
+      }
+    }
+</code>
+</pre>
+    
+<h5>Video</h5>
+<pre>
+ <code class="code-block">
+     <span class="http-method-text">GET</span>
+     api/video/ <span class="endpoint-info">-- get all videos</span>
+     api/video/{id : int} <span class="endpoint-info">-- get video by Id</span>    
+   
+ </code>
+ </pre>
+
+<pre>
+<code class="code-block">
+    <span class="http-response-text">Responses</span>
+    <span class="endpoint-info">-- get all videos</span>
+    {
+      "results": [
+        {
+          "id": 0,
+          "title": "string",
+          "url": "string"
+        }
+      ]
+    }
+
+    <span class="endpoint-info">-- get video by Id</span>    
+    {
+      "result": {
+        "id": 0,
+        "title": "string",
+        "description": "string",
+        "imageUrl": "string",
+        "url": "string",
+        "featuredChampions": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ]
+      }
+    }
+</code>
+</pre>
+</div>
+</body>
