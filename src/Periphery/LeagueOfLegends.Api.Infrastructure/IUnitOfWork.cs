@@ -14,7 +14,7 @@ public interface IUnitOfWork
     public ISkinRepository SkinRepository { get; }
     public IVideoRepository VideoRepository { get; }
     public IStoryRepository StoryRepository { get; }
-    
+
     public void BeginTransaction();
     public Task AddOrUpdateAsync(Entity entity);
     public Task DeleteAsync(Entity entity);

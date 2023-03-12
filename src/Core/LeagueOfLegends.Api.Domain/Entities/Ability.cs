@@ -9,5 +9,5 @@ public class Ability : Entity
     public virtual string Name { get; set; } = null!;
     public virtual string Mp4Url { get; set; } = null!;
     public virtual string WebmUrl { get; set; } = null!;
-    public virtual Champion Champion { get; set; } = null!;
+    public virtual Champion? Champion { get; set; } = null!;
 }

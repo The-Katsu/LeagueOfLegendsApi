@@ -2,6 +2,8 @@
 using LeagueOfLegends.Api.Application.Services.Interfaces;
 using LeagueOfLegends.Api.Domain.Contracts.Responses;
 using LeagueOfLegends.Api.Domain.Contracts.Responses.Comic;
+using LeagueOfLegends.Api.Domain.Entities;
+using LeagueOfLegends.Api.Domain.Exceptions;
 using LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 namespace LeagueOfLegends.Api.Application.Services.Implementations;
@@ -21,9 +23,7 @@ public class ComicService : IComicService
     public async Task<SingleResponse<ComicResponseWithDetails>> GetByIdAsync(int id)
     {
         var story = await _comicRepository.GetByIdAsync(id);
-        var response = story is not null ? 
-            new SingleResponse<ComicResponseWithDetails>(result: story.ToComicResponseWithDetails()) : 
-            null;
-        return response!;
+        if (story is null) throw new EntityNotFoundException(typeof(Story), id);
+        return new SingleResponse<ComicResponseWithDetails>(result: story.ToComicResponseWithDetails());
     }
 }

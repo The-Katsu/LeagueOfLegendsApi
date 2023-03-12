@@ -6,5 +6,5 @@ public class Skin : Entity
 {
     public virtual string Name { get; set; } = null!;
     public virtual string ImageUrl { get; set; } = null!;
-    public virtual Champion Champion { get; set; } = null!;
+    public virtual Champion? Champion { get; set; } = null!;
 }

@@ -9,6 +9,8 @@
   <ItemGroup>
     <PackageReference Include="FastEndpoints" Version="5.8.0" />
     <PackageReference Include="FastEndpoints.Swagger" Version="5.8.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
+    <PackageReference Include="HotChocolate.Data" Version="13.0.5" />
   </ItemGroup>
 
   <ItemGroup>

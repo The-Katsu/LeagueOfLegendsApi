@@ -2,6 +2,8 @@
 using LeagueOfLegends.Api.Application.Services.Interfaces;
 using LeagueOfLegends.Api.Domain.Contracts.Responses;
 using LeagueOfLegends.Api.Domain.Contracts.Responses.Champion;
+using LeagueOfLegends.Api.Domain.Entities;
+using LeagueOfLegends.Api.Domain.Exceptions;
 using LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 namespace LeagueOfLegends.Api.Application.Services.Implementations;
@@ -25,32 +27,28 @@ public class ChampionService : IChampionService
     public async Task<ArrayResponseWithInfo<ChampionResponse>> GetPageAsync(int page)
     {
         var champions = await _championRepository.GetChampionsPageAsync(page - 1);
+        if (champions.Count == 0) throw new PageNotFoundException(typeof(Champion), page);
         var count = await _championRepository.GetChampionsCountAsync();
-        var pages = (int) Math.Ceiling(Convert.ToDecimal(count) / Convert.ToDecimal(20));
-        var prev = page == 1 ? null : $"/api/champions/{page - 1}";
-        var next = (page + 1) > pages ? null : $"/api/champions/{page + 1}";
-        var response = new ArrayResponseWithInfo<ChampionResponse>
+        var pages = (int) Math.Ceiling(Convert.ToDecimal(count) / 20.0m);
+        return new ArrayResponseWithInfo<ChampionResponse>
         {
             Info = new Information
             {
-                Count = count,
+                TotalCount = count,
                 Pages = pages,
-                Prev = prev!,
-                Next = next!
+                Prev = page == 1 ? null : $"/api/champions/{page - 1}",
+                Next = page + 1 > pages ? null : $"/api/champions/{page + 1}"
             },
             Results = champions
                 .Select(ChampionMapper.ToChampionResponse)
                 .ToList()
         };
-        return response;
     }
 
     public async Task<SingleResponse<ChampionResponseWithDetails>> GetByIdAsync(int id)
     {
         var champion = await _championRepository.GetByIdAsync(id);
-        var response = champion is not null ? 
-            new SingleResponse<ChampionResponseWithDetails>(result: champion.ToChampionResponseWithDetails()) :
-            null;
-        return response!;
+        if (champion is null) throw new EntityNotFoundException(typeof(Champion), id);
+        return new SingleResponse<ChampionResponseWithDetails>(champion.ToChampionResponseWithDetails());
     }
 }
