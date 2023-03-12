@@ -1,3 +1,7 @@
+LeagueOfLegends.Api.sln.DotSettings
+appsettings.Development.json
+appsettings.json
+
 # /**/*.iml
 /target
 /.idea

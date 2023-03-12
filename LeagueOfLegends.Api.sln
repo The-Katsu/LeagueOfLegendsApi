@@ -12,16 +12,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BDAF004A-5950-450C-A5C9-AFA0BE42193B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Application", "src\Core\LeagueOfLegends.Api.Application\LeagueOfLegends.Api.Application.csproj", "{DDDCE658-BE9C-44F4-943D-9CE19448F5B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6266363-0002-4FF6-BC33-74B92C741C5B} = {A6266363-0002-4FF6-BC33-74B92C741C5B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Domain", "src\Core\LeagueOfLegends.Api.Domain\LeagueOfLegends.Api.Domain.csproj", "{00F56597-E110-42EA-B31B-353CF38A7D70}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrustructure", "Infrustructure", "{8356F6CF-88BC-4ECD-B3CB-ECD837E8E8DE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Periphery", "Periphery", "{8356F6CF-88BC-4ECD-B3CB-ECD837E8E8DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Persistence", "src\Infrustructure\LeagueOfLegends.Api.Persistence\LeagueOfLegends.Api.Persistence.csproj", "{4EFE0FA3-7616-433B-B1F0-AE28D6831E04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Persistence", "src\Periphery\LeagueOfLegends.Api.Persistence\LeagueOfLegends.Api.Persistence.csproj", "{4EFE0FA3-7616-433B-B1F0-AE28D6831E04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Documantation", "src\Presentation\LeagueOfLegends.Api.Documantation\LeagueOfLegends.Api.Documantation.csproj", "{A4ABB259-77F7-4360-B167-50854B87D141}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Infrastructure", "src\Infrustructure\LeagueOfLegends.Api.Infrastructure\LeagueOfLegends.Api.Infrastructure.csproj", "{A6266363-0002-4FF6-BC33-74B92C741C5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueOfLegends.Api.Infrastructure", "src\Periphery\LeagueOfLegends.Api.Infrastructure\LeagueOfLegends.Api.Infrastructure.csproj", "{A6266363-0002-4FF6-BC33-74B92C741C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

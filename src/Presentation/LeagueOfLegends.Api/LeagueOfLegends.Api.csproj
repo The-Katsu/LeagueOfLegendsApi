@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="FastEndpoints" Version="5.8.0" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.8.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
+    <PackageReference Include="HotChocolate.Data" Version="13.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\LeagueOfLegends.Api.Application\LeagueOfLegends.Api.Application.csproj" />
+    <ProjectReference Include="..\..\Periphery\LeagueOfLegends.Api.Infrastructure\LeagueOfLegends.Api.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Periphery\LeagueOfLegends.Api.Persistence\LeagueOfLegends.Api.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
