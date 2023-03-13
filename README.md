@@ -58,7 +58,7 @@ public static class NHibernateMigrationsManager
     {
         using var stream = new FileStream($"{Path}/init.sql", FileMode.Append, FileAccess.Write);
         using var writer = new StreamWriter(stream);
-        writer.Write($"{x}\n");
+        writer.Write($"{x}\n;");
     };
 
     public static Action<string> UpdateMigration => x =>
@@ -66,7 +66,7 @@ public static class NHibernateMigrationsManager
         var now = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
         using var stream = new FileStream($"{Path}/migration{now}.sql", FileMode.Append, FileAccess.Write);
         using var writer = new StreamWriter(stream);
-        writer.Write(x + "\n");
+        writer.Write($"{x}\n;");
     };
 }
 ```
