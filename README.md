@@ -13,7 +13,7 @@ Swagger UI - https://leagueapi-001-site1.etempurl.com/swagger/index.html
     - [DDD](#domain-driven-design)
     - [Configure NHibernate](#configure-nhibernate)
     - [Unit of Work with lazy repositories  ](#unit-of-work-with-lazy-repositories)
-    - [Fast Endpoints](#fast=endpoints)
+    - [Fast Endpoints](#fast-endpoints)
     - [Hot Chocolate](#hot-chocolate)
 
 ---  
