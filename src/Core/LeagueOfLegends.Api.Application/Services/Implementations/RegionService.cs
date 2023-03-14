@@ -13,6 +13,8 @@ public class RegionService : IRegionService
 
     public RegionService(IRegionRepository regionRepository) => _regionRepository = regionRepository;
 
+    public IQueryable<Region> GetQuery() => _regionRepository.ProvideQueryable();
+
     public async Task<ArrayResponse<RegionResponse>> GetAllAsync()
     {
         var regions = await _regionRepository.GetListAsync();

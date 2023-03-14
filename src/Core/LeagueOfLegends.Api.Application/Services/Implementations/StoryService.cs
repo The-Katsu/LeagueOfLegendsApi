@@ -2,6 +2,7 @@
 using LeagueOfLegends.Api.Application.Services.Interfaces;
 using LeagueOfLegends.Api.Domain.Contracts.Responses;
 using LeagueOfLegends.Api.Domain.Contracts.Responses.Story;
+using LeagueOfLegends.Api.Domain.Entities;
 using LeagueOfLegends.Api.Infrastructure.Repositories.Interfaces;
 
 namespace LeagueOfLegends.Api.Application.Services.Implementations;
@@ -11,6 +12,8 @@ public class StoryService : IStoryService
     private readonly IStoryRepository _storyRepository;
 
     public StoryService(IStoryRepository storyRepository) => _storyRepository = storyRepository;
+
+    public IQueryable<Story> GetQuery() => _storyRepository.ProvideQueryable();
 
     public async Task<ArrayResponse<StoryResponse>> GetAllAsync()
     {

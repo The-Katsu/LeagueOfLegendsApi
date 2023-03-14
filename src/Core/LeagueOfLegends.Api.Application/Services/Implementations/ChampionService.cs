@@ -14,6 +14,8 @@ public class ChampionService : IChampionService
     
     public ChampionService(IChampionRepository championRepository) => _championRepository = championRepository;
 
+    public IQueryable<Champion> GetQuery() => _championRepository.ProvideQueryable();
+
     public async Task<ArrayResponse<ChampionResponse>> GetAllAsync()
     {
         var champions = await _championRepository.GetListAsync();
