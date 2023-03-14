@@ -13,11 +13,7 @@ Swagger UI - https://leagueapi-001-site1.etempurl.com/swagger/index.html
     - [DDD](#domain-driven-design)
     - [Configure NHibernate](#configure-nhibernate)
     - [Unit of Work with lazy repositories  ](#unit-of-work-with-lazy-repositories)
-<<<<<<< HEAD
-    - [Fast Endpoints](#fast=endpoints)
-=======
     - [Fast Endpoints](#fast-endpoints)
->>>>>>> 600b2ce5b90ef0324538eaa24d6a948b26eb93b5
     - [Hot Chocolate](#hot-chocolate)
 
 ---  
@@ -46,7 +42,7 @@ Use Domain to store common things for all project like Entities, Contracts, Exce
 Use Persistence to configure with external services like ORM, Message brokers, Task schedulers etc.  
 Use Infrastructure for base external services logic implementation.  
 Use Application to provide business logic.  
-Use Presentation to display results of work.  
+Use Presentation to display results of your services.  
 
 
 ## Configure NHibernate  
@@ -62,11 +58,7 @@ public static class NHibernateMigrationsManager
     {
         using var stream = new FileStream($"{Path}/init.sql", FileMode.Append, FileAccess.Write);
         using var writer = new StreamWriter(stream);
-<<<<<<< HEAD
-        writer.Write($"{x}\n");
-=======
         writer.Write($"{x}\n;");
->>>>>>> 600b2ce5b90ef0324538eaa24d6a948b26eb93b5
     };
 
     public static Action<string> UpdateMigration => x =>
@@ -74,11 +66,7 @@ public static class NHibernateMigrationsManager
         var now = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
         using var stream = new FileStream($"{Path}/migration{now}.sql", FileMode.Append, FileAccess.Write);
         using var writer = new StreamWriter(stream);
-<<<<<<< HEAD
-        writer.Write(x + "\n");
-=======
         writer.Write($"{x}\n;");
->>>>>>> 600b2ce5b90ef0324538eaa24d6a948b26eb93b5
     };
 }
 ```
@@ -387,8 +375,4 @@ public IQueryable<Champion> Champion([Service] IChampionService championService)
 [UseSorting]
 public IQueryable<Champion> Champions([Service] IChampionService championService) =>
     championService.GetQuery();
-<<<<<<< HEAD
-```  
-=======
-```  
->>>>>>> 600b2ce5b90ef0324538eaa24d6a948b26eb93b5
+```
