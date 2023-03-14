@@ -1,5 +1,5 @@
-﻿using LeagueOfLegends.Api.Domain.Entities;
-using IQueryProvider = LeagueOfLegends.Api.Application.GraphQl.IQueryProvider;
+﻿using LeagueOfLegends.Api.Application.Services.Interfaces;
+using LeagueOfLegends.Api.Domain.Entities;
 
 namespace LeagueOfLegends.Api.GraphQl.Queries;
 
@@ -9,13 +9,13 @@ public class VideoQueries
     [UseFirstOrDefault]
     [UseProjection]
     [UseFiltering]
-    public IQueryable<Video> Video([Service] IQueryProvider queryProvider) =>
-        queryProvider.Videos;
+    public IQueryable<Video> Video([Service] IVideoService videoService) =>
+        videoService.GetQuery();
     
     [UseOffsetPaging(DefaultPageSize = 20, IncludeTotalCount = true)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Video> Videos([Service] IQueryProvider queryProvider) =>
-        queryProvider.Videos;
+    public IQueryable<Video> Videos([Service] IVideoService videoService) =>
+        videoService.GetQuery();
 }

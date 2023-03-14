@@ -14,6 +14,8 @@ public class ComicService : IComicService
 
     public ComicService(IComicRepository comicRepository) => _comicRepository = comicRepository;
 
+    public IQueryable<Comic> GetQuery() => _comicRepository.ProvideQueryable();
+
     public async Task<ArrayResponse<ComicResponse>> GetAllAsync()
     {
         var comics = await _comicRepository.GetListAsync();
