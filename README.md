@@ -10,39 +10,12 @@ Swagger UI - https://leagueapi-001-site1.etempurl.com/swagger/index.html
 ---  
 
 - Navigation
-    - [DDD](#domain-driven-design)
     - [Configure NHibernate](#configure-nhibernate)
     - [Unit of Work with lazy repositories  ](#unit-of-work-with-lazy-repositories)
     - [Fast Endpoints](#fast-endpoints)
     - [Hot Chocolate](#hot-chocolate)
 
 ---  
-
-## Domain Driven Design  
-
-### Base DDD project structure
-
-```powershell
-|-src
-    |--Core
-    |   |--Application
-    |   |--Domain
-    |
-    |--Periphery
-    |   |--Infrastructure
-    |   |--Persistence
-    |
-    |--Presentation
-        |--API
-```  
-
-How to use layers (imho):
- 
-Use Domain to store common things for all project like Entities, Contracts, Exceptions etc.  
-Use Persistence to configure with external services like ORM, Message brokers, Task schedulers etc.  
-Use Infrastructure for base external services logic implementation.  
-Use Application to provide business logic.  
-Use Presentation to display results of your services.  
 
 
 ## Configure NHibernate  
